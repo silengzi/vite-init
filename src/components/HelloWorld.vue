@@ -1,36 +1,26 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useStore } from 'vuex';
+
 
 defineProps<{ msg: string }>()
 
-const count = ref(0)
+const store = useStore()
+
+const addCount = () => {
+  store.commit('increment')
+}
+
+const addCountAsync = () => {
+  store.dispatch('increment')
+}
+
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
-
-  <p>
-    Recommended IDE setup:
-    <a href="https://code.visualstudio.com/" target="_blank">VS Code</a>
-    +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-  </p>
-
-  <p>See <code>README.md</code> for more information.</p>
-
-  <p>
-    <a href="https://vitejs.dev/guide/features.html" target="_blank">
-      Vite Docs
-    </a>
-    |
-    <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
-  </p>
-
-  <button type="button" @click="count++">count is: {{ count }}</button>
-  <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test hot module replacement.
-  </p>
+  <p>stats: {{ store.state.count }}</p>
+  <p><button @click="addCount">点我count+1</button></p>
+  <p><button @click="addCountAsync">点我count+1(异步)</button></p>
 </template>
 
 <style scoped>

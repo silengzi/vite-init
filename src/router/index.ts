@@ -6,7 +6,6 @@ const routes = [
   {
     path: '/',
     component: HelloWorld,
-
   },
 ]
 
